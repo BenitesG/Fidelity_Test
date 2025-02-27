@@ -1,0 +1,36 @@
+<!-- signup.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="shadow-wrap">
+    <div class="form-wrap">
+        <h3>Registrar</h3>
+        <form method="POST">
+            {% csrf_token %}
+            
+            {% for field in form %}
+            <div class="mb-3">
+                <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% if field.help_text %}
+                <p class="help-text">{{ field.help_text }}</p>
+                {% endif %}
+                {{ field }}              
+                {% if field.errors %}
+                    <div class="error-text">
+                        {% for error in field.errors %}
+                            <p>❌ {{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <a href="{% url 'base:login' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

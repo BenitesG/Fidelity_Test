@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% if request.user.is_authenticated %}
+    {% block content %}
+    <form method="post" action="{% url 'base:logout' %}">
+        {% csrf_token %}
+        <div class="logged">
+            <h1>Fidelity test</h1>
+            <h3 class='title'>Olá! {{request.user.username}}</h3>
+        <button class="btn" type="submit">Sair</button>
+        </div>
+    </form>
+    {% endblock content %}
+{% endif %}

@@ -1,0 +1,16 @@
+services:
+  psql:
+    container_name: psql
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: fidelity_test # Sugestão de nome para o DB
+      POSTGRES_USER: CHANGE-ME
+      POSTGRES_PASSWORD: CHANGE-ME
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

@@ -1,0 +1,123 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Mulish', sans-serif;
+    transition: 0.3s all ease-in-out;
+   }
+   body{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   background-color: #fff;
+   }
+
+    h3.title {
+        font-size: 30px;
+    }
+
+    .btn {
+        font-size: 20px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .logged {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+   .shadow-wrap{
+    border-radius: 5px;
+    padding: 25px;
+    background-color:#F0F2FB;
+   }
+   .form-wrap{
+    background-color: #fff;
+   padding: 70px;
+   }
+   .form-wrap form *{
+    display: block;
+    width: 100%;
+   }
+   .form-wrap form label{
+   margin-bottom: 5px;
+   font-size: 14px;
+   font-weight: 700;
+   line-height: 26px; 
+   }
+   .form-wrap form input{
+   padding: 12px 20px;
+   border-radius: 5px;
+   border: 1px solid #DAE1F5;
+   background: #FFF; 
+   color: #545D7A; 
+   }
+   #id_username{
+    margin-bottom: 20px;
+   }
+   .form-wrap button{
+    border-radius: 5px;
+   background: #10182F;
+   color: #FFF;
+   cursor: pointer;
+   text-align: center;
+   font-size: 16px;
+   padding: 12px 68px;
+   font-weight: 700;
+   border: 1px solid transparent;
+   margin-top: 30px;
+   line-height: 26px; 
+   }
+   .signup-link{
+    color: black;
+    font-size: 15px;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 25px;
+    display: block;
+   text-decoration: none;
+   }
+   .signup-link:hover{
+    text-decoration: underline;
+   }
+   .form-wrap button:hover{
+    background-color: #fff;
+    color: #10182F;
+    border-color: #10182F;
+   
+   }
+
+    .error-text {
+        color: red;
+        font-weight: bold;
+    }
+
+    .success-text {
+        color: green;
+        font-weight: bold;
+    }
+
+    .is-invalid {
+        border: 2px solid red;
+        background-color: #ffebee; 
+    }
+    
+    .is-valid {
+        border: 2px solid green;
+        background-color: #e8f5e9; 
+    }
+
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
