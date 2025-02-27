@@ -7,7 +7,7 @@ Protege o acesso contra usuários indevidos, impedindo registros duplicados e ac
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-- Você instalou a versão mais recente de `<Python 3.9> / Bibliotecas presentes em requirements.txt / Docker, Docker-Compose>`
+- Você instalou a versão mais recente de `Python 3.13> / Bibliotecas presentes em requirements.txt / Docker, Docker-Compose`
 - Você ter uma máquina `<Windows / Linux / Mac>`.
 
 ## 🚀 Instalando Fidelity Test
