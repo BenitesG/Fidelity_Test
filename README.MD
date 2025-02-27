@@ -18,8 +18,8 @@ Linux e macOS:
 
 ```
 # Clone o repositório
-git clone https://github.com/BenitesG/fidelity_test.git
-cd fidelity_test
+git clone https://github.com/BenitesG/Fidelity_Test.git
+cd Fidelity_Test
 
 # Configure o ambiente virtual e instale as dependências
 python3 -m venv venv
@@ -31,8 +31,8 @@ Windows:
 
 ```
 # Clone o repositório
-git clone https://github.com/BenitesG/fidelity_test.git
-cd fidelity_test
+git clone https://github.com/BenitesG/Fidelity_Test.git
+cd Fidelity_Test
 
 # Configure o ambiente virtual e instale as dependências
 python -m venv venv
