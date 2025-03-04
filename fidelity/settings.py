@@ -99,7 +99,6 @@ LOGOUT_REDIRECT_URL = "base:login"
 LOGIN_URL = "login/"
 
 # Email settings
-DEFAULT_FROM_EMAIL = 'noreply@seuprojeto.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
