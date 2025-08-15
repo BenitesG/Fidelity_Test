@@ -104,5 +104,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'testefidelity5@gmail.com'
-EMAIL_HOST_PASSWORD = 'hmvj ydcb dboa kcqy'
+EMAIL_HOST_PASSWORD = 'uqbw tvnd rgzt drsp'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
