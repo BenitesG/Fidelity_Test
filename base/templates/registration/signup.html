@@ -1,36 +1,72 @@
-<!-- signup.html -->
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="shadow-wrap">
-    <div class="form-wrap">
-        <h3>Registrar</h3>
-        <form method="POST">
-            {% csrf_token %}
-            
-            {% for field in form %}
-            <div class="mb-3">
-                <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {% if field.help_text %}
-                <p class="help-text">{{ field.help_text }}</p>
-                {% endif %}
-                {{ field }}              
-                {% if field.errors %}
-                    <div class="error-text">
-                        {% for error in field.errors %}
-                            <p>❌ {{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            {% endfor %}
-            
-            <div class="form-buttons">
-                <button type="submit" class="btn btn-primary">Registrar</button>
-                <a href="{% url 'base:login' %}" class="btn btn-secondary">Cancelar</a>
-            </div>
-        </form>
-    </div>
-</div>
+  <div class="form-wrap">
+    <h3>Registrar</h3>
 
+    <form id="signup-form" method="POST">
+      {% csrf_token %}
+
+      {# --- Username --- #}
+      <div class="mb-3">
+        <label class="form-label" for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+      
+      {# --- Email --- #}
+      <div class="mb-3">
+        <label class="form-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+
+      {# --- Password 1 --- #}
+      <div class="mb-3">
+        <label class="form-label" for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+        {% if form.password1.help_text %}
+          <p class="help-text">{{ form.password1.help_text }}</p>
+        {% endif %}
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+        
+        <!-- Validation -->
+        <div id="password-feedback" class="password-rules">
+            <p id="length" class="invalid">Mínimo de 8 caracteres</p>
+            <p id="uppercase" class="invalid">Uma letra maiúscula</p>
+            <p id="number" class="invalid">Um número</p>
+            <p id="special" class="invalid">Um caractere especial</p>
+        </div>
+      </div>
+
+      {# --- Password 2 --- #}
+      <div class="mb-3">
+        <label class="form-label" for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+        <!-- Feedback para confirmação de senha -->
+        <p id="confirm-password-feedback"></p>
+      </div>
+
+      <!-- Captcha-->
+      <div class="mb-3">
+        {{ form.captcha }}
+        {{ form.captcha.errors }}
+      </div>
+
+      <!-- Form Button-->
+      <div class="form-buttons">
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        <a href="{% url 'base:login' %}" class="btn btn-secondary">Retornar</a>
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock content %}
+
+{% block scripts %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="{% static 'js/form-validation.js' %}"></script>
+{% endblock scripts %}

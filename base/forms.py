@@ -3,7 +3,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from .models import CustomUser
 from django.core.validators import RegexValidator
+from django_recaptcha.fields import ReCaptchaField
+from .widgets import CleanReCaptchaV2Checkbox
 import re
+
 
 
 # Config for the form
@@ -22,17 +25,17 @@ class UserForm(UserCreationForm):
     )
     
     password1 = forms.CharField(
-        help_text="Sua senha deve ter ao menos 8 caracteres, incluindo 1 letra maiúscula, 1 número e 1 caractere especial.",
         label="Senha",
         widget=forms.PasswordInput(attrs={'placeholder': 'Digite sua senha'}),
-        min_length=8,
     )
     
     password2 = forms.CharField(
         label='Confirme sua senha',
         widget=forms.PasswordInput(attrs={'placeholder': 'Confirme sua senha'}),
     )
-
+    
+    captcha = ReCaptchaField(widget=CleanReCaptchaV2Checkbox())
+    
     class Meta:
         model = CustomUser
         fields = ["username", "email", "password1", "password2"]
@@ -44,21 +47,9 @@ class UserForm(UserCreationForm):
             raise ValidationError("O nome de usuário deve conter apenas letras!")
         return username
 
-    # Password specification
-    def clean_password1(self):
-        password1 = self.cleaned_data.get('password1')
-        if not re.search(r'[A-Z]', password1): # type: ignore
-            raise ValidationError("A senha deve conter pelo menos uma letra maiúscula.")
-        if not re.search(r'[0-9]', password1): # type: ignore
-            raise ValidationError("A senha deve conter pelo menos um número.")
-        if not re.search(r'[\W_]', password1): # type: ignore
-            raise ValidationError("A senha deve conter pelo menos um caractere especial.")
-        return password1
-    
     # Check if email is beeing used to register
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        # Garante que o email esteja em minúsculas
         email = email.lower() # type: ignore
         if CustomUser.objects.filter(email=email).exists():
             raise ValidationError("Este email já está em uso.")

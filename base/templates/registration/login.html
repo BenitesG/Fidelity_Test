@@ -2,40 +2,41 @@
 
 {% block content %}
 <div class="shadow-wrap">
-  <div class="form-wrap">
-    <h3>Login</h3>
+    <div class="form-wrap">
+        <h3>Login</h3>
 
-    {% if messages %}
-      <div class="messages">
-        {% for message in messages %}
-          <div class="error-message" role="alert">
-            ❌ {{ message }}
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
-    
-    <form method="POST">
-      {% csrf_token %}
-      
-      {% for field in form %}
-        <div class="form-group">
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {{ field }}
-          
-          {% if field.errors %}
-            <div class="error-text">
-              {% for error in field.errors %}
-                <p>❌ {{ error }}</p>
-              {% endfor %}
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="error-message" role="alert">
+                        ❌ {{ message }}
+                    </div>
+                {% endfor %}
             </div>
-          {% endif %}
-        </div>
-      {% endfor %}
-      
-      <button type="submit">Enviar</button>
-    </form>
-    <a class="signup-link" href="{% url 'base:register' %}">Registre-se</a>
-  </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    
+                    {% if field.errors %}
+                        <div class="error-text">
+                            {% for error in field.errors %}
+                                <p>❌ {{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <button type="submit">Enviar</button>
+        </form>
+        
+        <a class="signup-link" href="{% url 'base:register' %}">Registre-se</a>
+    </div>
 </div>
 {% endblock content %}

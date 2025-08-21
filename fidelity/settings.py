@@ -5,12 +5,11 @@ from dotenv import load_dotenv
 # Load .env file
 BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv_path = BASE_DIR / "dotenv_files" / ".env"
-
 load_dotenv(dotenv_path)
 
-SECRET_KEY = os.getenv("SECRET_KEY", "change-me")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
@@ -23,6 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "base",
+    "django_recaptcha",
 ]
 
 MIDDLEWARE = [
@@ -69,11 +69,40 @@ DATABASES = {
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
+    # Django validators
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+     "OPTIONS": {"min_length": 8}},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    
+    # Custom validators.
+    {"NAME": "base.validators.UppercaseValidator"},
+    {"NAME": "base.validators.SpecialCharValidator"},
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Cache Configuration
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# Ratelimit configuration
+RATELIMIT_USE_CACHE = 'default'
+
+# Captcha
+RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_JS_CALLBACK = False
 
 # Internationalization
 LANGUAGE_CODE = "pt-br"
@@ -83,7 +112,10 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media files
 MEDIA_URL = "/media/"
@@ -104,5 +136,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'testefidelity5@gmail.com'
-EMAIL_HOST_PASSWORD = 'hmvj ydcb dboa kcqy'
+EMAIL_HOST_PASSWORD = 'uqbw tvnd rgzt drsp'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

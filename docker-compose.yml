@@ -1,16 +1,42 @@
 services:
+  # DB Service
   psql:
     container_name: psql
     image: postgres:13-alpine
     restart: always
-    environment:
-      POSTGRES_DB: fidelity_test # Sugestão de nome para o DB
-      POSTGRES_USER: CHANGE-ME
-      POSTGRES_PASSWORD: CHANGE-ME
-    ports:
-      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./dotenv_files/.env
+    ports:
+      - "5432:5432"
 
+  # Redis Service
+  redis:
+    container_name: redis
+    image: redis:6-alpine 
+    restart: always
+    ports:
+      - "6379:6379"
+
+  # Django service
+  web:
+    container_name: django_app
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./dotenv_files/.env
+    environment:
+      - POSTGRES_HOST=psql
+      - POSTGRES_PORT=5432
+    depends_on:
+      - psql
+      - redis 
+      
 volumes:
   postgres_data:
