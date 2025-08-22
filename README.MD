@@ -48,12 +48,7 @@ Com os contêineres rodando, execute as migrações para criar as tabelas no ban
 
 ```bash
 docker-compose exec web python manage.py migrate
-``` 
-
-```bash
-docker-compose exec web python manage.py migrate
 ```
-
 
 ### ☕ Usando o Fidelity Test
 Após a instalação, a aplicação estará rodando e acessível no seu navegador via: http://127.0.0.1:8000/
