@@ -9,7 +9,7 @@
 
 ---
 
-### 💻 Pré-requisitos
+## 💻 Pré-requisitos
 
 Antes de começar, garanta que você tenha os seguintes softwares instalados:
 
@@ -20,38 +20,38 @@ O Python não precisa ser instalado localmente, pois ele será executado dentro 
 
 ---
 
-### 🚀 Instalação e Execução
+## 🚀 Instalação e Execução
 
 Para rodar o Fidelity Test em sua máquina, siga estas etapas:
 
-**1. Clone o Repositório:**
+#**1. Clone o Repositório:**
 ```bash
 git clone https://github.com/BenitesG/Fidelity_Test.git
 cd Fidelity_Test
 ```
 
-**2. Configure as Variáveis de Ambiente:**
+#**2. Configure as Variáveis de Ambiente:**
 O projeto utiliza um arquivo `.env` para gerenciar configurações sensíveis.
 Navegue até a pasta dotenv_files/.
 Renomeie o arquivo .env-example para `.env`.
-Abra o arquivo .env e substitua os valores CHANGE-ME e placeholders pelas suas chaves e credenciais reais (SECRET_KEY, senhas do banco de dados, chaves do reCAPTCHA, etc.).
+Abra o arquivo `.env` e substitua os valores CHANGE-ME e placeholders pelas suas chaves e credenciais reais (SECRET_KEY, senhas do banco de dados, chaves do reCAPTCHA, etc.).
 
-**3. Construa e Inicie os Contêineres:**
+#**3. Construa e Inicie os Contêineres:**
 Este comando irá construir a imagem da aplicação Django e iniciar todos os serviços (web, banco de dados e cache).
 ```bash
 docker-compose up --build -d 
 ``` 
-(--build: Vai construir a imagem a partir do Dockerfile. -d: Roda os contêineres em segundo plano)
+**(--build: Vai construir a imagem a partir do Dockerfile. -d: Roda os contêineres em segundo plano)**
 
-**4. Aplique as Migrações do Banco de Dados:**
+#**4. Aplique as Migrações do Banco de Dados:**
 Com os contêineres rodando, execute as migrações para criar as tabelas no banco de dados.
 
 ```bash
 docker-compose exec web python manage.py migrate
 ```
 
-### ☕ Usando o Fidelity Test
-Após a instalação, a aplicação estará rodando e acessível no seu navegador via: http://127.0.0.1:8000/
+## ☕ Usando o Fidelity Test
+Após tudo feito, a aplicação estará rodando e acessível no seu navegador via: http://127.0.0.1:8000/
 
 **Possíveis comandos Úteis do Docker Compose:**
 
